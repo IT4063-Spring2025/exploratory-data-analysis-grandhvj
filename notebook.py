@@ -907,15 +907,35 @@ auto_mpg_df['origin'].value_counts()
 # </details>
 
 # **What do the values in the `origin` column represent?**
+These values represent the regions where the cars were manufactured:
 
+1.0 → USA
+2.0 → Europe
+3.0 → Asia
 # #### **BONUS**: show a scatter plot of the `horsepower` column vs the `weight` column
+
+# In[54]:
+
+
+# Load the dataset (assuming auto_mpg_df is already loaded)
+# auto_mpg_df = pd.read_csv("auto-mpg.csv")  # Uncomment if loading from a CSV
+
+# Scatter plot
+plt.figure(figsize=(8, 6))
+plt.scatter(auto_mpg_df['horsepower'], auto_mpg_df['weight'], alpha=0.5, color='blue')
+plt.xlabel('Horsepower')
+plt.ylabel('Weight')
+plt.title('Horsepower vs. Weight')
+plt.grid(True)
+plt.show()
+
 
 # ## Wrap up
 # Remember to update the self reflection and self evaluations on the `README` file.
 
 # Make sure you run the following cell; this converts this Jupyter notebook to a Python script. and will make the process of reviewing your code on GitHub easier
 
-# In[49]:
+# In[53]:
 
 
 # 🦉: The following command converts this Jupyter notebook to a Python script.

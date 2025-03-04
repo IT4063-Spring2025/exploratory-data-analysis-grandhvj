@@ -20,8 +20,11 @@
 # #### Package Imports
 # We will keep coming back to this cell to add "import" statements, and configure libraries as we need
 
-# In[ ]:
+# In[3]:
 
+
+get_ipython().run_line_magic('pip', 'install scipy')
+get_ipython().run_line_magic('pip', 'install matplotlib')
 
 import pandas as pd
 from scipy.stats import trim_mean
@@ -51,10 +54,10 @@ plt.style.use("bmh")
 # 
 # Make sure you name the variable `auto_mpg_df` and that you use the appropriate pandas method to load the data.
 
-# In[ ]:
+# In[4]:
 
 
-
+auto_mpg_df = pd.read_table('./data/auto-mpg/auto-mpg.data', sep="\t")
 
 
 # <details>
@@ -76,10 +79,22 @@ plt.style.use("bmh")
 # #### 2.1: Display the <u>first</u> 5 rows of the dataframe
 # 
 
-# In[ ]:
+# In[5]:
 
 
-
+auto_mpg_df.head()
+  # or 
+  # auto_mpg_df.head(5)
+  # or 
+  # auto_mpg_df.head(n=5) 
+  # or 
+  # auto_mpg_df[:5] 
+  # or 
+  # auto_mpg_df.iloc[:5] 
+  # or 
+  # auto_mpg_df.iloc[0:5] 
+  # or 
+  # auto_mpg_df.iloc[[0,1,2,3,4]] 
 
 
 # <details>
@@ -104,10 +119,10 @@ plt.style.use("bmh")
 
 # #### 2.2: Display the <u>last</u> 5 rows of the dataframe
 
-# In[ ]:
+# In[6]:
 
 
-
+auto_mpg_df.tail()
 
 
 # <details>
@@ -121,10 +136,10 @@ plt.style.use("bmh")
 # #### 2.3: Display <u>random</u> 5 rows of the dataframe
 # just viewing the first and last records may not be enough. We may want to see some random records to make sure we have the data we expect.
 
-# In[ ]:
+# In[7]:
 
 
-
+auto_mpg_df.sample(5)
 
 
 # <details>
@@ -142,10 +157,10 @@ plt.style.use("bmh")
 # 
 # #### 3.1: Display the number of rows and columns in the dataframe
 
-# In[ ]:
+# In[8]:
 
 
-
+auto_mpg_df.shape
 
 
 # <details>
@@ -159,10 +174,10 @@ plt.style.use("bmh")
 # #### 3.2: Display a summary about the dataframe
 # 
 
-# In[ ]:
+# In[9]:
 
 
-
+auto_mpg_df.info()
 
 
 # 
@@ -176,10 +191,10 @@ plt.style.use("bmh")
 
 # ### 3.3: Display the statistics for the dataframe
 
-# In[ ]:
+# In[10]:
 
 
-
+auto_mpg_df.describe()
 
 
 # <details>
@@ -205,10 +220,10 @@ plt.style.use("bmh")
 # 
 # </details>
 
-# In[ ]:
+# In[11]:
 
 
-
+auto_mpg_df.duplicated().sum()
 
 
 # 
@@ -223,10 +238,12 @@ plt.style.use("bmh")
 # #### 4.2: Show the duplicate records
 # using the results of the duplicated() method as a predicate to filter the dataframe, displaying the duplicate records. 
 
-# In[ ]:
+# In[13]:
 
 
-
+auto_mpg_df[
+   auto_mpg_df.duplicated()
+]
 
 
 # 
@@ -251,10 +268,12 @@ plt.style.use("bmh")
 #   - You can specify a subset of columns to check for duplicates by passing a list of column names to the `subset` parameter.
 # </details>
 
-# In[ ]:
+# In[14]:
 
 
-
+auto_mpg_df.duplicated(
+   subset=['mpg', 'cylinders', 'acceleration', 'origin']
+).sum()
 
 
 # 
@@ -280,10 +299,10 @@ plt.style.use("bmh")
 #   - Make sure you either save the results of the method to a new variable, or use the `inplace` parameter to update the dataframe in place.
 # </details>
 
-# In[ ]:
+# In[15]:
 
 
-
+auto_mpg_df.drop_duplicates(inplace=True)
 
 
 # 
@@ -298,10 +317,10 @@ plt.style.use("bmh")
 # #### 5.2: Confirm that the duplicate records were removed
 # Check the number of records in the dataframe to confirm that the duplicates were removed.
 
-# In[ ]:
+# In[16]:
 
 
-
+auto_mpg_df.shape
 
 
 # <details>
@@ -333,10 +352,10 @@ How many and what are the missing records? ANSWER HERE
 # 
 # </details>
 
-# In[ ]:
+# In[17]:
 
 
-
+auto_mpg_df.isna().sum()
 
 
 # <details>
@@ -357,10 +376,10 @@ How many and what are the missing records? ANSWER HERE
 # 
 # </details>
 
-# In[ ]:
+# In[18]:
 
 
-
+auto_mpg_df.isnull().sum()
 
 
 # <details>
@@ -373,6 +392,7 @@ How many and what are the missing records? ANSWER HERE
 
 # #### What's the difference between `isna()` and `isnull()`? what's your source?
 ANSWER HERE
+-0 
 
 # ### Exercise 7: Data Cleaning: Dropping Missing Values
 # 
@@ -391,10 +411,13 @@ ANSWER HERE
 # 
 # </details>
 
-# In[ ]:
+# In[19]:
 
 
-
+auto_mpg_df.dropna(
+     subset=['mpg'],
+     inplace=True
+   )
 
 
 # <details>
@@ -410,10 +433,10 @@ ANSWER HERE
 
 # #### 7.2: Confirm that the missing values in `mpg` were removed
 
-# In[ ]:
+# In[21]:
 
 
-
+auto_mpg_df.isna().sum()
 
 
 # <details>
@@ -852,7 +875,7 @@ display(without_outliers.shape)
 
 # Make sure you run the following cell; this converts this Jupyter notebook to a Python script. and will make the process of reviewing your code on GitHub easier
 
-# In[ ]:
+# In[2]:
 
 
 # 🦉: The following command converts this Jupyter notebook to a Python script.

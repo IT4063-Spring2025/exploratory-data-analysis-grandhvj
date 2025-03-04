@@ -79,22 +79,11 @@ auto_mpg_df = pd.read_table('./data/auto-mpg/auto-mpg.data', sep="\t")
 # #### 2.1: Display the <u>first</u> 5 rows of the dataframe
 # 
 
-# In[5]:
+# In[56]:
 
 
 auto_mpg_df.head()
-  # or 
-  # auto_mpg_df.head(5)
-  # or 
-  # auto_mpg_df.head(n=5) 
-  # or 
-  # auto_mpg_df[:5] 
-  # or 
-  # auto_mpg_df.iloc[:5] 
-  # or 
-  # auto_mpg_df.iloc[0:5] 
-  # or 
-  # auto_mpg_df.iloc[[0,1,2,3,4]] 
+  
 
 
 # <details>
@@ -119,7 +108,7 @@ auto_mpg_df.head()
 
 # #### 2.2: Display the <u>last</u> 5 rows of the dataframe
 
-# In[6]:
+# In[ ]:
 
 
 auto_mpg_df.tail()
@@ -136,7 +125,7 @@ auto_mpg_df.tail()
 # #### 2.3: Display <u>random</u> 5 rows of the dataframe
 # just viewing the first and last records may not be enough. We may want to see some random records to make sure we have the data we expect.
 
-# In[7]:
+# In[ ]:
 
 
 auto_mpg_df.sample(5)
@@ -174,7 +163,7 @@ auto_mpg_df.shape
 # #### 3.2: Display a summary about the dataframe
 # 
 
-# In[9]:
+# In[ ]:
 
 
 auto_mpg_df.info()
@@ -191,7 +180,7 @@ auto_mpg_df.info()
 
 # ### 3.3: Display the statistics for the dataframe
 
-# In[10]:
+# In[ ]:
 
 
 auto_mpg_df.describe()
@@ -238,12 +227,12 @@ auto_mpg_df.duplicated().sum()
 # #### 4.2: Show the duplicate records
 # using the results of the duplicated() method as a predicate to filter the dataframe, displaying the duplicate records. 
 
-# In[13]:
+# In[ ]:
 
 
 auto_mpg_df[
-   auto_mpg_df.duplicated()
-]
+    auto_mpg_df.duplicated()
+ ]
 
 
 # 
@@ -268,11 +257,11 @@ auto_mpg_df[
 #   - You can specify a subset of columns to check for duplicates by passing a list of column names to the `subset` parameter.
 # </details>
 
-# In[14]:
+# In[ ]:
 
 
 auto_mpg_df.duplicated(
-   subset=['mpg', 'cylinders', 'acceleration', 'origin']
+    subset=['mpg', 'cylinders', 'acceleration', 'origin']
 ).sum()
 
 
@@ -299,7 +288,7 @@ auto_mpg_df.duplicated(
 #   - Make sure you either save the results of the method to a new variable, or use the `inplace` parameter to update the dataframe in place.
 # </details>
 
-# In[15]:
+# In[ ]:
 
 
 auto_mpg_df.drop_duplicates(inplace=True)
@@ -334,16 +323,17 @@ auto_mpg_df.shape
 # ### Exercise 6: Data Cleaning: Checking for Missing Values
 # #### 6.1: Use `info()` to check for missing values
 
-# In[51]:
+# In[ ]:
 
 
-# Check for missing values using info()
 auto_mpg_df.info()
 
-How many and what are the missing records? ANSWER HERE
-The info() output shows that there are 399 non-null values in each column out of a total of 399 entries. This means there are no missing values in the dataset.
 
-Answer: There are 0 missing records.
+# How many and what are the missing records? ANSWER HERE
+# The info() output shows that there are 399 non-null values in each column out of a total of 399 entries. This means there are no missing values in the dataset.
+# 
+# Answer: There are 0 missing records.
+
 # #### 6.2: Use `isna()` to check for missing values
 # 
 # <details>
@@ -395,7 +385,9 @@ auto_mpg_df.isnull().sum()
 
 # #### What's the difference between `isna()` and `isnull()`? what's your source?
 
-the difeerence between the number of records in the dataset and the number of non-null values in each column is 0.
+# 
+# the difeerence between the number of records in the dataset and the number of non-null values in each column is 0.
+
 # ### Exercise 7: Data Cleaning: Dropping Missing Values
 # 
 # #### 7.1: Drop the missing values of the `mpg` column
@@ -413,13 +405,13 @@ the difeerence between the number of records in the dataset and the number of no
 # 
 # </details>
 
-# In[19]:
+# In[ ]:
 
 
 auto_mpg_df.dropna(
-     subset=['mpg'],
-     inplace=True
-   )
+      subset=['mpg'],
+      inplace=True
+    )
 
 
 # <details>
@@ -435,7 +427,7 @@ auto_mpg_df.dropna(
 
 # #### 7.2: Confirm that the missing values in `mpg` were removed
 
-# In[21]:
+# In[ ]:
 
 
 auto_mpg_df.isna().sum()
@@ -673,12 +665,12 @@ print(f"Lower Limit: {lower_limit}, Upper Limit: {upper_limit}")
 #   - You can use the `|` operator to combine multiple conditions in a Pandas filter.
 # </details>
 
-# In[33]:
+# In[ ]:
 
 
 auto_mpg_df[
-     (auto_mpg_df['displacement'] < lower_limit) | (auto_mpg_df['displacement'] > upper_limit)
-   ]
+      (auto_mpg_df['displacement'] < lower_limit) | (auto_mpg_df['displacement'] > upper_limit)
+    ]
 
 
 # <details>
@@ -727,12 +719,12 @@ z_scores = (auto_mpg_df['horsepower'] - displacement_mean) / displacement_std
 
 # #### 9.5: Using Pandas filtering, show records that are outliers in the `displacement` column using the z-score method
 
-# In[38]:
+# In[ ]:
 
 
 auto_mpg_df[
-    (z_scores < -3) | (z_scores > 3)
-  ]
+      (z_scores < -3) | (z_scores > 3)
+    ]
 
 
 # <details>
@@ -748,14 +740,14 @@ auto_mpg_df[
 # #### 9.6: Using Pandas filtering, show records that are outliers in the `displacement` column using the percentile method
 # we'll use a 1% threshold for this exercise.
 
-# In[40]:
+# In[ ]:
 
 
 quantile_1 = auto_mpg_df['displacement'].quantile(0.01)
 quantile_99 = auto_mpg_df['displacement'].quantile(0.99)
 auto_mpg_df[
-    (auto_mpg_df['displacement'] < quantile_1) | (auto_mpg_df['displacement'] > quantile_99)
-]
+      (auto_mpg_df['displacement'] < quantile_1) | (auto_mpg_df['displacement'] > quantile_99)
+  ]
 
 
 # <details>
@@ -772,11 +764,11 @@ auto_mpg_df[
 
 # #### 9.7: Display the distribution of the values in the `displacement` column using a histogram
 
-# In[42]:
+# In[ ]:
 
 
 auto_mpg_df.plot.hist(y='displacement', bins=40)
-plt.show()
+   plt.show()
 
 
 # <details>
@@ -875,15 +867,17 @@ display(without_outliers.shape)
 # * Numerical-Discrete
 # * Categorical-Ordinal
 # * Categorical-nominal
-1. mpg:  Numerical-Continuous          
-2. cylinders:    Numerical-Discrete  
-3. displacement:   Numerical-Continuous
-4. horsepower:    Numerical-Continuous
-5. weight:   Numerical-Continuous     
-6. acceleration: Numerical-Continuous 
-7. model year:  Categorical-Ordinal  
-8. origin:    Categorical-nominal    
-9. car name:   Categorical-nominal   
+
+# 1. mpg:  Numerical-Continuous          
+# 2. cylinders:    Numerical-Discrete  
+# 3. displacement:   Numerical-Continuous
+# 4. horsepower:    Numerical-Continuous
+# 5. weight:   Numerical-Continuous     
+# 6. acceleration: Numerical-Continuous 
+# 7. model year:  Categorical-Ordinal  
+# 8. origin:    Categorical-nominal    
+# 9. car name:   Categorical-nominal   
+
 # #### 10.2: Show all the possible values for the `origin` column
 # 
 # <details>
@@ -907,20 +901,18 @@ auto_mpg_df['origin'].value_counts()
 # </details>
 
 # **What do the values in the `origin` column represent?**
-These values represent the regions where the cars were manufactured:
 
-1.0 → USA
-2.0 → Europe
-3.0 → Asia
+# These values represent the regions where the cars were manufactured:
+# 
+# 1.0 → USA
+# 2.0 → Europe
+# 3.0 → Asia
+
 # #### **BONUS**: show a scatter plot of the `horsepower` column vs the `weight` column
 
-# In[54]:
+# In[ ]:
 
 
-# Load the dataset (assuming auto_mpg_df is already loaded)
-# auto_mpg_df = pd.read_csv("auto-mpg.csv")  # Uncomment if loading from a CSV
-
-# Scatter plot
 plt.figure(figsize=(8, 6))
 plt.scatter(auto_mpg_df['horsepower'], auto_mpg_df['weight'], alpha=0.5, color='blue')
 plt.xlabel('Horsepower')
@@ -935,7 +927,7 @@ plt.show()
 
 # Make sure you run the following cell; this converts this Jupyter notebook to a Python script. and will make the process of reviewing your code on GitHub easier
 
-# In[53]:
+# In[55]:
 
 
 # 🦉: The following command converts this Jupyter notebook to a Python script.
